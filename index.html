@@ -1,13 +1,19 @@
 <html>
 <head>
+
   <title>Let me code that for you!</title>
+
   <link rel="stylesheet" href="lmctfy.css"  />
+
 </head>
 <body>
 
-  <div class="wrap">
-      <h1>Let me code that for you!</h1>
-      <code id="typed"></code>
+  <h1>Let me code that for you!</h1>
+
+  <code id="typed"></code>
+
+  <div id="gist">
+    <a href="">View on Github</a>
   </div>
 
   <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
@@ -30,6 +36,8 @@
       $.ajax('https://api.github.com/gists/' + gist, {
         crossDomain: true,
         success: function(data, status) {
+
+          $('#gist a').attr('href', 'https://gist.github.com/' + gist);
 
           // start with supporting only a single file per gist
           for (file in data.files) {

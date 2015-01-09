@@ -2,16 +2,27 @@
 body {
   background: #333;
   color: #ddd;
+  font-family: monospace;
 }
 
 h1 {
   color: #f00;
-  font-family: monospace;
 }
 
 code {
   white-space: pre;
 }
+
+a {
+  color: #888;
+}
+
+#gist {
+  position: absolute;
+  right: 20px;
+  top: 16px;
+}
+
 
 
 /* code for animated blinking cursor */
