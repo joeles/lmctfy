@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title>Let me code that for you!</title>
+  <link rel="stylesheet" href="lmctfy.css"  />
+</head>
+<body>
+
+  <div class="wrap">
+      <h1>Let me code that for you!</h1>
+      <code id="typed"></code>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+  <script src="typed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    function htmlEscape(str) {
+      return String(str)
+              .replace(/&/g, '&amp;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#39;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;');
+    }
+
+    $(function(){
+
+      var gist = location.search.substr(1),
+          content;
+
+      $.ajax('https://api.github.com/gists/' + gist, {
+        crossDomain: true,
+        success: function(data, status) {
+
+          // start with supporting only a single file per gist
+          for (file in data.files) {
+            content = htmlEscape(data.files[file].content);
+            break;
+          }
+
+          console.log(content)
+          $("#typed").typed({
+              strings: [content],
+              typeSpeed: 100,
+              loop: false,
+              contentType: 'html', // or text
+              loopCount: false
+          });
+        }
+      })
+    });
+  </script>
+
+</body>
+</html>
