@@ -1,7 +1,7 @@
 # lmctfy
 In the spirit of lmgtfy.com, Let Me Code That For You!
 
-Use public gists to create links so your friends don't have to code so much.
+Use public gists to create links so your friends don't have to code so hard.
 
 Link format is http://lmctfy.co/?{hash} where {hash} = the hash portion of a public gist.github.com url. 
 
