@@ -30,8 +30,15 @@
 
     $(function(){
 
-      var gist = location.search.substr(1),
+      var gist = (location.search)
+               ? location.search.substr(1)
+               : location.pathname.substr(1),
           content;
+
+      if ( ! gist) {
+        $("#typed").html("Help me, help you! You need to provide a GitHub gist in the url.");
+        return;
+      }
 
       $.ajax('https://api.github.com/gists/' + gist, {
         crossDomain: true,
