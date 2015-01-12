@@ -4,65 +4,58 @@
   <title>Let me code that for you!</title>
 
   <link rel="stylesheet" href="lmctfy.css"  />
-
+<style></style>
 </head>
 <body>
 
   <h1>Let me code that for you!</h1>
 
-  <code id="typed"></code>
+  <code id="typo"></code>
 
   <div id="gist">
     <a href="">View gist on Github</a>
   </div>
 
-  <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
-  <script src="typed.js" type="text/javascript"></script>
+  <script src="lmctfy.js" type="text/javascript"></script>
   <script type="text/javascript">
-    function htmlEscape(str) {
-      return String(str)
-              .replace(/&/g, '&amp;')
-              .replace(/"/g, '&quot;')
-              .replace(/'/g, '&#39;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;');
-    }
 
-    $(function(){
+    document.addEventListener('DOMContentLoaded', function() {
 
       var gist = (location.search)
                ? location.search.substr(1)
                : location.pathname.substr(1),
           content;
 
-      if ( ! gist) {
-        $("#typed").html("Help me, help you! You need to provide a GitHub gist in the url.");
-        return;
+      function error() {
+        document.querySelector("#typo").innerHTML = "Help me, help you! You need to provide a GitHub gist in the url.";
       }
 
-      $.ajax('https://api.github.com/gists/' + gist, {
-        crossDomain: true,
-        success: function(data, status) {
+      if (gist) {
 
-          $('#gist a').attr('href', 'https://gist.github.com/' + gist);
+        ajax.get('https://api.github.com/gists/' + gist, {}, {
 
-          // start with supporting only a single file per gist
-          for (file in data.files) {
-            content = htmlEscape(data.files[file].content);
-            break;
-          }
+          success: function(data, status) {
 
-          console.log(content)
-          $("#typed").typed({
-              strings: [content],
-              typeSpeed: 100,
-              loop: false,
-              contentType: 'html', // or text
-              loopCount: false
-          });
-        }
-      })
+            document.querySelector('#gist a').href = 'https://gist.github.com/' + gist;
+
+            // start with supporting only a single file per gist
+            for (file in data.files) {
+              content = data.files[file].content;
+              break;
+            }
+
+            typo.type('#typo', content, {speed: 150});
+          },
+
+          error: error
+        })
+
+      } else {
+
+        error();
+      }
     });
+
   </script>
 
 </body>
