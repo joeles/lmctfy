@@ -10,53 +10,16 @@
 
   <h1>Let me code that for you!</h1>
 
-  <code id="typo"></code>
+  <code id="tpyo"></code>
 
   <div id="gist">
-    <a href="">View gist on Github</a>
+    <a href="">View full Gist on GitHub</a>
   </div>
 
+  <!-- ajx and tpyo.js are repos under github.com/joeles. i'll bower all this up later -->
+  <script src="ajx/ajx.js" type="text/javascript"></script>
+  <script src="tpyo.js/tpyo.js" type="text/javascript"></script>
   <script src="lmctfy.js" type="text/javascript"></script>
-  <script type="text/javascript">
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-      var gist = (location.search)
-               ? location.search.substr(1)
-               : location.pathname.substr(1),
-          content;
-
-      function error() {
-        document.querySelector("#typo").innerHTML = "Help me, help you! You need to provide a GitHub gist in the url.";
-      }
-
-      if (gist) {
-
-        ajax.get('https://api.github.com/gists/' + gist, {}, {
-
-          success: function(data, status) {
-
-            document.querySelector('#gist a').href = 'https://gist.github.com/' + gist;
-
-            // start with supporting only a single file per gist
-            for (file in data.files) {
-              content = data.files[file].content;
-              break;
-            }
-
-            typo.type('#typo', content, {speed: 150});
-          },
-
-          error: error
-        })
-
-      } else {
-
-        error();
-      }
-    });
-
-  </script>
 
 </body>
 </html>
