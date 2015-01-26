@@ -1,0 +1,22 @@
+{
+  "name": "lmctfy",
+  "main": "tpyo.js",
+  "version": "v1.0.0",
+  "homepage": "https://github.com/joeles/tpyo",
+  "authors": [
+    "Joel Escobar <joeles@gmail.com>"
+  ],
+  "description": "Let me code that for you!",
+  "dependencies": {
+    "ajx": "~1.0.0",
+    "tpyo": "~1.0.0"
+  },
+  "keywords": [
+    "typewriter",
+    "typo"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*"
+  ]
+}
